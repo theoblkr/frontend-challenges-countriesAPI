@@ -1,13 +1,12 @@
 <template>
-  <div id="app" :style="darkActivated ? 'background-color: black;' : 'background-color: white;'">
+  <div id="app">
     <Header />
-    <CountriesList/>
+    <router-view/>
   </div>
 </template>
 
 <script>
 import Header from './components/layouts/Header.vue'
-import CountriesList from './components/CountriesList.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -17,7 +16,6 @@ export default {
     }),
   components: {
     Header,
-    CountriesList
   }
 }
 </script>

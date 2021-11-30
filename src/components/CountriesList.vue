@@ -2,8 +2,10 @@
   <div v-if="countries.length" >
       <input type="text" v-model="countrySearch">
       <p v-for="(country, index)  in filteredListCountries" :key="index">
+          <router-link :to="{ name: 'DetailCountry', params: { country: country.name.nativeName.fra.common }}">
           <img :src='country.flags.png' />
           {{ country.name.nativeName.fra.common }}
+          </router-link>
       </p>
   </div>
 </template>
