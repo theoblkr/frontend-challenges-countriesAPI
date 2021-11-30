@@ -1,6 +1,11 @@
 <template>
   <div v-if="countries.length" >
       <input type="text" v-model="countrySearch">
+      <select v-model="regionSelected">
+          <option v-for='region in regions' :value="region" :key="region">
+              {{region}}
+          </option>
+      </select>
       <p v-for="(country, index)  in filteredListCountries" :key="index">
           <router-link :to="{ name: 'CountryDetails', params: { country: country.name.official }}">
           <img :src='country.flags.png' />
@@ -11,27 +16,34 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import axios from 'axios'
+import { regions } from '../helpers/regionsList'
 
 export default {
     name: "CountriesList",
     data () {
         return {
-            countrySearch: ''
+            countrySearch: '',
+            regionSelected: '',
+            countries: [],
+            regions: regions
         }
     },
+    watch: {
+        regionSelected: function () {
+        console.log(this.regionSelected)
+        },
+    },
    computed: {
-       ...mapState({
-            countries: state => state.countries.countriesList
-        }),
         filteredListCountries() {
-        return this.countries.filter(country => {
-            return country.name.nativeName.fra.common.toLowerCase().includes(this.countrySearch.toLowerCase())
-        })
+            return this.countries.filter(country => {
+                return country.name.nativeName.fra.common.toLowerCase().includes(this.countrySearch.toLowerCase())
+            })
         }
     },
     async created () {
-        this.$store.dispatch('countries/getAllCountries')
+        const { data: countries } = await axios.get('https://restcountries.com/v3.1/lang/french')
+        this.countries = countries
     }
 }
 </script>
