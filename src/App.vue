@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="darkActivated ? 'dark-mode': 'white-mode' ">
     <Header />
     <router-view/>
   </div>
@@ -29,5 +29,13 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0rem 4rem;
+}
+.dark-mode{
+  background: black;
+  color: white
+}
+.white-mode{
+  background: inherit;
+  color: inherit
 }
 </style>

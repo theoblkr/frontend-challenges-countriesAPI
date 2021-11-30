@@ -11,26 +11,27 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState } from 'vuex'
 
 export default {
     name: "CountriesList",
     data () {
         return {
-            countries: [],
             countrySearch: ''
         }
     },
    computed: {
+       ...mapState({
+            countries: state => state.countries.countriesList
+        }),
         filteredListCountries() {
-        return this.countries[0].filter(country => {
+        return this.countries.filter(country => {
             return country.name.nativeName.fra.common.toLowerCase().includes(this.countrySearch.toLowerCase())
         })
         }
     },
     async created () {
-        const {data: countries} = await axios.get('https://restcountries.com/v3.1/lang/french')
-        this.countries.push(countries)
+        this.$store.dispatch('countries/getAllCountries')
     }
 }
 </script>
