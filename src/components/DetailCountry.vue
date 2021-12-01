@@ -5,20 +5,20 @@
        <div class="listDetail">
          <section>
           <p>{{country.name.common}}</p>
-          <p>Native name :</p>
+          <p>Native name :{{country.name.nativeName.eng.official}} </p>
           <p>Population : {{country.population}}</p>
           <p>Region : {{country.region}}</p>
-          <p>Sub region : {{country.subregion}}</p>
-          <p>Capital : {{country.capital.join('')}}</p>
+          <p>Sub region : {{ country.subregion }}</p>
+          <p>Capital : {{ capital }}</p>
         </section>
         <section>
-          <p>Top level domain :  {{country.tld.join(',')}}</p>
-          <p>Currencies :</p>
-          <p>Languages :</p>
+          <p>Top level domain :  {{ tld }}</p>
+          <p>Currencies : {{ currencies }}</p>
+          <p>Languages : {{ languages }}</p>
         </section>
        </div>
         
-        <p>Border countries : {{country.borders.join(',')}}</p>
+        <p>Border countries : {{ borders }}</p>
      </div>
   </div>
 </template>
@@ -28,11 +28,28 @@ import axios from 'axios'
 
 export default {
   name: 'DetailCountry',
-      data () {
-        return {
-            country: null
-        }
+  data () {
+    return {
+        country: null
+    }
+  },
+  computed: {
+    languages() {
+      return Object.values(this.country.languages).map((element) => element).join(',')
     },
+    currencies() {
+      return Object.values(this.country.currencies).map((element) => element.name).join(',')
+    },
+    tld() {
+      return this.country.tld.join(',')
+    },
+    capital() {
+      return this.country.capital.join(',')
+    },
+    borders() {
+      return this.country.borders.join(',')
+    }
+  },
   async created(){
     const {data: country} = await axios.get(`https://restcountries.com/v3.1/name/${this.$route.params.country}?fullText=true`)
     this.country = country[0]
