@@ -2,7 +2,6 @@
 
 html, body {
     margin: 0;
-    height: 100%;
 }
 a {
     color: inherit;
@@ -16,9 +15,11 @@ a {
     text-align: center;
     color: hsl(200, 15%, 8%);
     font-size: 14px;
+    height: 100%;
+
 }
 .dark-mode{
-    background: black;
+    background: hsl(200, 15%, 8%);
     color: hsl(0, 0%, 100%);
 }
 .white-mode{

@@ -31,13 +31,17 @@
   }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 #header {
     display: flex;
     justify-content: space-between;
     padding: 2rem 4rem;
     margin-bottom: 4rem;
     border-bottom: 1px solid grey;
+    span:first-child{
+      font-size: 20px;
+      font-weight: 600;
+    }
 }
 #icon {
     margin-right: 10px;

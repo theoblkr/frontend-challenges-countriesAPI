@@ -11,19 +11,23 @@
         <v-icon
           id="icon"
           name="search"
+          :class="darkActivated ? 'dark-mode containerDark': 'white-mode' "
         />
         <input
           v-model="countrySearch"
           type="text"
           class="inputSearch"
+          placeholder="Search for a country"
+          :class="darkActivated ? 'dark-mode containerDark': 'white-mode' "
         >
       </div>
       <select
         v-model="regionSelected"
         class="selectorSearch"
+        :class="darkActivated ? 'dark-mode containerDark': 'white-mode' "
       >
         <option value="" disabled selected>
-          Select your option
+          Filter by region
         </option>
         <option
           v-for="region in regions"
@@ -39,6 +43,7 @@
         v-for="(country, index) in filteredListCountries"
         :key="index"
         class="containerCardCountry"
+        :class="darkActivated ? 'dark-mode containerDark': 'white-mode' "
       >
         <router-link
           :to="{ name: 'CountryDetails', params: { country: country.name.official }}"
@@ -69,6 +74,7 @@
 
   export default {
     name: "CountriesList",
+    props: {darkActivated: Boolean},
     data () {
       return {
         countrySearch: '',
@@ -121,8 +127,11 @@
         }
     }
 }
-input, .selectorSearch {
-  height: 30px;
+.containerDark {
+  background: hsl(209, 23%, 22%)
+}
+input {
+  height: 45px;
   padding: 5px 60px;
   width: 300px;
   box-shadow: 1px 1px 14px 2px #0000000f;
@@ -140,9 +149,24 @@ input, .selectorSearch {
       outline: none;
       border: none;
   }
-  &::placeholder {
-      color: var(--app-text-color);
+}
+.selectorSearch{
+  height: 45px;
+  width: 160px;
+  box-shadow: 1px 1px 14px 2px #0000000f;
+  border-radius: 4px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  text-align: center;
+  border: none;
+  @media (max-width: 768px) {
+      width: 100%;
   }
+  -moz-appearance: none;
+  /* for Safari, Chrome, Opera */
+  -webkit-appearance: none;
 }
 .containerCountries {
     display: grid;
