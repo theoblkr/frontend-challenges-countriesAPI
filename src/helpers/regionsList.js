@@ -1,1 +1,1 @@
-export const regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
+export const regions = ['All Regions', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
