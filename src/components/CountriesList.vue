@@ -1,6 +1,6 @@
 <template>
   <div v-if="loading">
-    <square />
+    <square :color="darkActivated ? '#ffffff': '#000000' " />
   </div>
   <div
     v-else-if="countries.length"
@@ -180,8 +180,12 @@ input {
     overflow: hidden;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 300px);
-    box-shadow: 1px 1px 14px 2px #0000000f;
+    box-shadow: 1px 1px 14px 18px #0000000f;
     height: 100%;
+    transition: transform 500ms ease;
+    &:hover {
+      transform: translate(0, -5px);
+    }
 }
 img {
     width: 100%;
