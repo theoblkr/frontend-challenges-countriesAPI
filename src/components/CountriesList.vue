@@ -1,65 +1,95 @@
 <template>
-  <div v-if="countries.length" style="padding: 0rem 4rem;" >
-      <div class="countainerSearch">
-        <div class="iconContainer">
-            <v-icon name="search" id="icon"  />
-            <input type="text" v-model="countrySearch" class="inputSearch">
-        </div>
-        <select v-model="regionSelected" class="selectorSearch">
-            <option value="" disabled selected>Select your option</option>
-            <option v-for='region in regions' :value="region" :key="region">
-                {{region}}
-            </option>
-        </select>
+  <div
+    v-if="countries.length"
+    style="padding: 0rem 4rem;"
+  >
+    <div class="countainerSearch">
+      <div class="iconContainer">
+        <v-icon
+          id="icon"
+          name="search"
+        />
+        <input
+          v-model="countrySearch"
+          type="text"
+          class="inputSearch"
+        >
       </div>
-      <div class="containerCountries">
-        <div v-for="(country, index)  in filteredListCountries" :key="index" class="containerCardCountry">
-            <router-link :to="{ name: 'CountryDetails', params: { country: country.name.official }}" class="containerDetail">
-                <img :src='country.flags.png' />
-                {{ country.name.common }}
-            </router-link>
-        </div>
+      <select
+        v-model="regionSelected"
+        class="selectorSearch"
+      >
+        <option
+          value=""
+          disabled
+          selected
+        >
+          Select your option
+        </option>
+        <option
+          v-for="region in regions"
+          :key="region"
+          :value="region"
+        >
+          {{ region }}
+        </option>
+      </select>
+    </div>
+    <div class="containerCountries">
+      <div
+        v-for="(country, index) in filteredListCountries"
+        :key="index"
+        class="containerCardCountry"
+      >
+        <router-link
+          :to="{ name: 'CountryDetails', params: { country: country.name.official }}"
+          class="containerDetail"
+        >
+          <img :src="country.flags.png">
+          {{ country.name.common }}
+        </router-link>
       </div>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import { regions } from '../helpers/regionsList'
+  import axios from 'axios'
+  import { regions } from '../helpers/regionsList'
 
-export default {
+  export default {
     name: "CountriesList",
     data () {
-        return {
-            countrySearch: '',
-            regionSelected: '',
-            countries: [],
-            regions: regions
-        }
+      return {
+        countrySearch: '',
+        regionSelected: '',
+        countries: [],
+        regions: regions
+      }
     },
-   computed: {
-        filteredListCountries() {
-            if(this.regionSelected !== '' && this.regionSelected !== 'All Regions'){
-                return this.countries.filter(country => {
-                    return country.region.toLowerCase() === this.regionSelected.toLowerCase()
-                })
+    computed: {
+      filteredListCountries() {
+        if(this.regionSelected !== '' && this.regionSelected !== 'All Regions'){
+          return this.countries.filter(country => {
+            return country.region.toLowerCase() === this.regionSelected.toLowerCase()
+          })
                
-            } else if(this.countrySearch !== '') {
-                 return this.countries.filter(country => {
-                    return country.name.common.toLowerCase().includes(this.countrySearch.toLowerCase())
-                })
-            } 
-            else {
-                return this.countries
-            }
-            
+        } else if(this.countrySearch !== '') {
+          return this.countries.filter(country => {
+            return country.name.common.toLowerCase().includes(this.countrySearch.toLowerCase())
+          })
+        } 
+        else {
+          return this.countries
         }
+            
+      }
     },
     async created () {
-        const { data: countries } = await axios.get('https://restcountries.com/v3.1/all')
-        this.countries = countries
+      const { data: countries } = await axios.get('https://restcountries.com/v3.1/all')
+      this.countries = countries
     }
-}
+  }
 </script>
 
 <style lang="scss">

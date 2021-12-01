@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import CountriesList from '../components/CountriesList.vue'
+  import CountriesList from '../components/CountriesList.vue'
 
-export default {
-  name: 'Home',
-  components: {
-    CountriesList
+  export default {
+    name: 'Home',
+    components: {
+      CountriesList
+    }
   }
-}
 </script>

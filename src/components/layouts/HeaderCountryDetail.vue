@@ -1,21 +1,28 @@
 <template>
   <header id="header">
-      <router-link :to="{ name: 'Home'}" id="sectionGoBack">
-        <v-icon name="arrow-left" id="icon"  :style="darkActivated ? 'color: white; stroke: black;' : 'color: inherit;'"/>
-        <span :style="darkActivated ? 'color: white;' : 'color: inherit;'">Back</span>
-      </router-link>
+    <router-link
+      id="sectionGoBack"
+      :to="{ name: 'Home'}"
+    >
+      <v-icon
+        id="icon"
+        name="arrow-left"
+        :style="darkActivated ? 'color: white; stroke: black;' : 'color: inherit;'"
+      />
+      <span :style="darkActivated ? 'color: white;' : 'color: inherit;'">Back</span>
+    </router-link>
   </header>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+  import { mapState } from 'vuex'
 
-export default {
+  export default {
     name: 'HeaderCountryDetail',
     computed: mapState({
-        darkActivated: state => state.mode.darkActivated
+      darkActivated: state => state.mode.darkActivated
     })
-}
+  }
 </script>
 
 <style lang='scss' scoped>

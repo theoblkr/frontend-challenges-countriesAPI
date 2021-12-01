@@ -1,27 +1,34 @@
 <template>
   <header id="header">
-      <span :style="darkActivated ? 'color: white;' : 'color: inherit;'">Where is the world ?</span>
-      <div @click="onChangeMode(darkActivated)" id="sectionDarkMode">
-        <v-icon name="moon" id="icon"  :style="darkActivated ? 'color: white; stroke: black;' : 'color: inherit;'"/>
-        <span :style="darkActivated ? 'color: white;' : 'color: inherit;'">Dark Mode</span>
-      </div>
+    <span :style="darkActivated ? 'color: white;' : 'color: inherit;'">Where is the world ?</span>
+    <div
+      id="sectionDarkMode"
+      @click="onChangeMode(darkActivated)"
+    >
+      <v-icon
+        id="icon"
+        name="moon"
+        :style="darkActivated ? 'color: white; stroke: black;' : 'color: inherit;'"
+      />
+      <span :style="darkActivated ? 'color: white;' : 'color: inherit;'">Dark Mode</span>
+    </div>
   </header>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
 
-export default {
+  export default {
     name: 'Header',
     computed: mapState({
-        darkActivated: state => state.mode.darkActivated
+      darkActivated: state => state.mode.darkActivated
     }),
     methods: {
-         ...mapActions({
-            onChangeMode: 'mode/onChangeMode'
-        })
+      ...mapActions({
+        onChangeMode: 'mode/onChangeMode'
+      })
     }
-}
+  }
 </script>
 
 <style scoped>
