@@ -24,11 +24,15 @@ export default {
 html, body {
   margin: 0;
 }
+a {
+  color: inherit;
+  text-decoration: inherit;
+  display: block;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 0rem 4rem;
 }
 .dark-mode{
   background: black;

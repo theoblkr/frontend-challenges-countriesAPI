@@ -1,5 +1,5 @@
 <template>
-  <div v-if="countries.length" >
+  <div v-if="countries.length" style="padding: 0rem 4rem;" >
       <div class="countainerSearch">
         <div class="iconContainer">
             <v-icon name="search" id="icon"  />

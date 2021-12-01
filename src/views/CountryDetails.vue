@@ -1,14 +1,19 @@
 <template>
-  <DetailCountry />
+  <div>
+    <HeaderCountryDetail/>
+    <DetailCountry />
+  </div>
 </template>
 
 <script>
 import DetailCountry from '../components/DetailCountry.vue'
+import HeaderCountryDetail from '../components/layouts/HeaderCountryDetail.vue'
 
 export default {
   name: 'CountryDetails',
   components: {
-    DetailCountry
+    DetailCountry,
+    HeaderCountryDetail
   }
 }
 </script>
