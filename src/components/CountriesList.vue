@@ -1,12 +1,17 @@
 <template>
   <div v-if="countries.length" >
-      <input type="text" v-model="countrySearch">
-      <select v-model="regionSelected">
+      <div class="countainerSearch">
+        <div class="iconContainer">
+            <v-icon name="search" id="icon"  />
+            <input type="text" v-model="countrySearch" class="inputSearch">
+        </div>
+        <select v-model="regionSelected" class="selectorSearch">
             <option value="" disabled selected>Select your option</option>
-          <option v-for='region in regions' :value="region" :key="region">
-              {{region}}
-          </option>
-      </select>
+            <option v-for='region in regions' :value="region" :key="region">
+                {{region}}
+            </option>
+        </select>
+      </div>
       <div class="containerCountries">
         <div v-for="(country, index)  in filteredListCountries" :key="index" class="containerCardCountry">
             <router-link :to="{ name: 'CountryDetails', params: { country: country.name.official }}" class="containerDetail">
@@ -57,7 +62,49 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.countainerSearch {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    .iconContainer {
+        display: flex;
+        position: relative;
+        #icon {
+        position: absolute;
+        z-index: 10;
+        left: 20px;
+        top: 50%;
+        transform: translate(0, -50%);
+        color: var(--app-text-color);
+        }
+        input {
+        height: 30px;
+        padding: 5px 60px;
+        width: 300px;
+        box-shadow: 1px 1px 14px 2px #0000000f;
+        border-radius: 4px;
+        color: var(--app-text-color);
+        background-color: var(--app-elements-background-color);
+        font-family: "Nunito Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        outline: none;
+        border: none;
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+        &:focus,
+        &:focus-visible {
+            outline: none;
+            border: none;
+        }
+        &::placeholder {
+            color: var(--app-text-color);
+        }
+        }
+    }
+}
 .containerCountries {
     display: grid;
     align-items: center;
@@ -65,7 +112,7 @@ export default {
     grid-gap: 3rem;
 }
 .containerCardCountry {
-    margin: 10px 0 0 2%;
+    margin: 10px 0 0 0;
     border-radius: 6px;
     overflow: hidden;
     grid-template-columns: repeat(4, 1fr);
