@@ -11,7 +11,7 @@
           <p v-if="country.name.nativeName.eng">
             Native name :{{ country.name.nativeName.eng.official }}
           </p>
-          <p>Population : {{ country.population }}</p>
+          <p>Population : {{ new Intl.NumberFormat('en-US').format(country.population) }}</p>
           <p>Region : {{ country.region }}</p>
           <p>Sub region : {{ country.subregion }}</p>
           <p>Capital : {{ capital }}</p>

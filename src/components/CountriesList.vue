@@ -1,6 +1,9 @@
 <template>
+  <div v-if="loading">
+    <square />
+  </div>
   <div
-    v-if="countries.length"
+    v-else-if="countries.length"
     style="padding: 0rem 4rem;"
   >
     <div class="countainerSearch">
@@ -19,11 +22,7 @@
         v-model="regionSelected"
         class="selectorSearch"
       >
-        <option
-          value=""
-          disabled
-          selected
-        >
+        <option value="" disabled selected>
           Select your option
         </option>
         <option
@@ -46,7 +45,18 @@
           class="containerDetail"
         >
           <img :src="country.flags.png">
-          {{ country.name.common }}
+          <div id="countainerInfos">
+            <p id="title">
+              {{ country.name.common }}
+            </p>
+            <p>Population : {{ new Intl.NumberFormat('en-US').format(country.population) }}</p>
+            <p>Region : {{ country.region }}</p>
+            <p>
+              Capital :
+              <span v-for="capital in country.capital" :key="capital">
+                {{ capital }}</span>
+            </p>
+          </div>
         </router-link>
       </div>
     </div>
@@ -64,7 +74,8 @@
         countrySearch: '',
         regionSelected: '',
         countries: [],
-        regions: regions
+        regions: regions,
+        loading: true
       }
     },
     computed: {
@@ -87,6 +98,7 @@
     },
     async created () {
       const { data: countries } = await axios.get('https://restcountries.com/v3.1/all')
+      this.loading = false
       this.countries = countries
     }
   }
@@ -101,39 +113,36 @@
         display: flex;
         position: relative;
         #icon {
-        position: absolute;
-        z-index: 10;
-        left: 20px;
-        top: 50%;
-        transform: translate(0, -50%);
-        color: var(--app-text-color);
-        }
-        input {
-        height: 30px;
-        padding: 5px 60px;
-        width: 300px;
-        box-shadow: 1px 1px 14px 2px #0000000f;
-        border-radius: 4px;
-        color: var(--app-text-color);
-        background-color: var(--app-elements-background-color);
-        font-family: "Nunito Sans", sans-serif;
-        font-size: 14px;
-        font-weight: 300;
-        outline: none;
-        border: none;
-        @media (max-width: 768px) {
-            width: 100%;
-        }
-        &:focus,
-        &:focus-visible {
-            outline: none;
-            border: none;
-        }
-        &::placeholder {
-            color: var(--app-text-color);
-        }
+          position: absolute;
+          z-index: 10;
+          left: 20px;
+          top: 50%;
+          transform: translate(0, -50%);
         }
     }
+}
+input, .selectorSearch {
+  height: 30px;
+  padding: 5px 60px;
+  width: 300px;
+  box-shadow: 1px 1px 14px 2px #0000000f;
+  border-radius: 4px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  border: none;
+  @media (max-width: 768px) {
+      width: 100%;
+  }
+  &:focus,
+  &:focus-visible {
+      outline: none;
+      border: none;
+  }
+  &::placeholder {
+      color: var(--app-text-color);
+  }
 }
 .containerCountries {
     display: grid;
@@ -155,5 +164,13 @@ img {
     max-width: 100%;
     height: 200px;
     object-fit: cover;
+}
+#countainerInfos {
+  margin: 25px;
+  #title{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
 }
 </style>
