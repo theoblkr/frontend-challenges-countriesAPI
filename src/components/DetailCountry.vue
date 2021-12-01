@@ -1,11 +1,11 @@
 <template>
-  <div class="countainerDetail">
+  <div v-if='country' class="countainerDetail">
      <img :src='country.flags.png' />
      <div>
        <div class="listDetail">
          <section>
           <p>{{country.name.common}}</p>
-          <p>Native name :{{country.name.nativeName.eng.official}} </p>
+          <p v-if='country.name.nativeName.eng'>Native name :{{country.name.nativeName.eng.official}} </p>
           <p>Population : {{country.population}}</p>
           <p>Region : {{country.region}}</p>
           <p>Sub region : {{ country.subregion }}</p>
@@ -17,8 +17,7 @@
           <p>Languages : {{ languages }}</p>
         </section>
        </div>
-        
-        <p>Border countries : {{ borders }}</p>
+        <p v-if="borders">Border countries : {{ borders }}</p>
      </div>
   </div>
 </template>
@@ -47,7 +46,7 @@ export default {
       return this.country.capital.join(',')
     },
     borders() {
-      return this.country.borders.join(',')
+      return this.country.borders && this.country.borders.join(',')
     }
   },
   async created(){
