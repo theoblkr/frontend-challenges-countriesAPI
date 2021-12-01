@@ -46,7 +46,7 @@
         :class="darkActivated ? 'dark-mode containerDark': 'white-mode' "
       >
         <router-link
-          :to="{ name: 'CountryDetails', params: { country: country.name.official }}"
+          :to="{ name: 'CountryDetails', params: { country: country.cca2 }}"
           class="containerDetail"
         >
           <img :src="country.flags.png">

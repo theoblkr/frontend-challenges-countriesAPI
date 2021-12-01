@@ -26,8 +26,15 @@
           <p>Languages : {{ languages }}</p>
         </section>
       </div>
-      <p v-if="borders">
-        Border countries : {{ borders }}
+      <p v-if="country.borders">
+        Border countries : 
+        <router-link
+          v-for="element in country.borders" 
+          :key="element"
+          :to="{ name: 'CountryDetails', params: { country: element }}" class="bordersCountry"
+        >
+          {{ element }}
+        </router-link>
       </p>
     </div>
   </div>
@@ -57,31 +64,33 @@
       capital() {
         return this.country.capital.join(',')
       },
-      borders() {
-        return this.country.borders && this.country.borders.join(',')
-      }
     },
     async created(){
-      const {data: country} = await axios.get(`https://restcountries.com/v3.1/name/${this.$route.params.country}?fullText=true`)
+      const {data: country} = await axios.get(`https://restcountries.com/v3.1/alpha/${this.$route.params.country}?fullText=true`)
       this.country = country[0]
     }
   }
 </script>
 
 <style scoped lang="scss">
-  .countainerDetail {
-    padding: 0rem 4rem;
+.countainerDetail {
+  padding: 0rem 4rem;
+  display: flex;
+  flex-direction: row;
+  img {
+    margin-right: 4rem;
+    width: 60%;
+    height: auto;
+  }
+  .listDetail {
     display: flex;
     flex-direction: row;
-    img {
-      margin-right: 4rem;
-      width: 60%;
-      height: auto;
-    }
-    .listDetail {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
+    justify-content: space-around;
   }
+}
+.bordersCountry {
+  padding: 5px 10px;
+  margin: 10px;
+  background-color: hsl(0, 0%, 98%);
+}
 </style>
