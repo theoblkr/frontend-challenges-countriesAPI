@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,600,800&display=swap');
+
 html, body {
     margin: 0;
     height: 100%;
@@ -8,14 +10,16 @@ a {
     display: block;
 }
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100%;
+    text-align: center;
+    color: hsl(200, 15%, 8%);
+    font-size: 14px;
 }
 .dark-mode{
     background: black;
-    color: white
+    color: hsl(0, 0%, 100%);
 }
 .white-mode{
     background: inherit;
