@@ -15,13 +15,9 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-
   export default {
     name: 'HeaderCountryDetail',
-    computed: mapState({
-      darkActivated: state => state.mode.darkActivated
-    })
+    props: {darkActivated: Boolean},
   }
 </script>
 

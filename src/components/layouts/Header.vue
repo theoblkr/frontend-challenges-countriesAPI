@@ -37,10 +37,19 @@
     justify-content: space-between;
     padding: 2rem 4rem;
     margin-bottom: 4rem;
-    border-bottom: 1px solid grey;
     span:first-child{
       font-size: 20px;
       font-weight: 600;
+    }
+    &::after{
+      background: linear-gradient(to right, hsl(200, 15%, 8%) 0%, hsl(0, 0%, 100%) 100%);
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 2px;
+      left: 0;
+      right: 0;
+      top: 90px;
     }
 }
 #icon {

@@ -4,8 +4,12 @@
     class="countainerDetail"
   >
     <img :src="country.flags.png">
-    <div>
-      <div class="listDetail">
+    <div
+      :class="darkActivated ? 'dark-mode': 'white-mode' "
+    >
+      <div
+        class="listDetail"
+      >
         <section>
           <p>{{ country.name.common }}</p>
           <p v-if="country.name.nativeName.eng">
@@ -34,6 +38,7 @@
 
   export default {
     name: 'DetailCountry',
+    props: {darkActivated: Boolean},
     data () {
       return {
         country: null
