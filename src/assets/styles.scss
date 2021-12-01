@@ -2,6 +2,7 @@
 
 html, body {
     margin: 0;
+    min-height: 100vh;
 }
 a {
     color: inherit;
@@ -15,14 +16,14 @@ a {
     text-align: center;
     color: hsl(200, 15%, 8%);
     font-size: 14px;
-    height: 100%;
-
+    min-height: 100vh;
 }
 .dark-mode{
     background: hsl(200, 15%, 8%);
     color: hsl(0, 0%, 100%);
 }
+
 .white-mode{
     background: inherit;
-    color: inherit
+    color: inherit;
 }
