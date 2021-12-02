@@ -1,6 +1,6 @@
 <template>
   <div v-if="loading">
-    <square :color="darkActivated ? '#ffffff': '#000000' " />
+    <square :color="darkActivated ? '#ffffff': '#000000' " class="squareLoading" />
   </div>
   <div
     v-else-if="countries.length"

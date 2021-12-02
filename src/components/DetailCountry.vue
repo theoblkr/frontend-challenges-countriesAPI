@@ -1,41 +1,48 @@
 <template>
-  <div
-    v-if="country"
-    class="countainerDetail"
-  >
-    <img :src="country.flags.png">
+  <div>
+    <div v-if="loading">
+      <square :color="darkActivated ? '#ffffff': '#000000' " class="squareLoading" />
+    </div>
     <div
-      :class="darkActivated ? 'dark-mode': 'white-mode' "
+      v-else-if="country"
+      class="countainerDetail"
     >
+      <img :src="country.flags.png">
       <div
-        class="listDetail"
+        :class="darkActivated ? 'dark-mode': 'white-mode' "
+        style="margin-left: 13rem; text-align:left"
       >
-        <section>
-          <p>{{ country.name.common }}</p>
-          <p v-if="country.name.nativeName.eng">
-            Native name :{{ country.name.nativeName.eng.official }}
-          </p>
-          <p>Population : {{ new Intl.NumberFormat('en-US').format(country.population) }}</p>
-          <p>Region : {{ country.region }}</p>
-          <p>Sub region : {{ country.subregion }}</p>
-          <p>Capital : {{ capital }}</p>
-        </section>
-        <section>
-          <p>Top level domain :  {{ tld }}</p>
-          <p>Currencies : {{ currencies }}</p>
-          <p>Languages : {{ languages }}</p>
-        </section>
-      </div>
-      <p v-if="country.borders">
-        Border countries : 
-        <router-link
-          v-for="element in country.borders" 
-          :key="element"
-          :to="{ name: 'CountryDetails', params: { country: element }}" class="bordersCountry"
+        <h1>{{ country.name.common }}</h1>
+        <div
+          class="listDetail"
         >
-          {{ element }}
-        </router-link>
-      </p>
+          <section>
+            <p v-if="country.name.nativeName.eng">
+              <span>Native name : </span>{{ country.name.nativeName.eng.official }}
+            </p>
+            <p><span>Population : </span>{{ new Intl.NumberFormat('en-US').format(country.population) }}</p>
+            <p><span>Region : </span>{{ country.region }}</p>
+            <p><span>Subegion : </span>{{ country.subregion }}</p>
+            <p><span>Capital : </span>{{ capital }}</p>
+          </section>
+          <section>
+            <p><span>Top level domain : </span>{{ tld }}</p>
+            <p><span>Currencies : </span>{{ currencies }}</p>
+            <p><span>Languages : </span>{{ languages }}</p>
+          </section>
+        </div>
+        <p v-if="country.borders" id="borderContainer">
+          <span>Border countries : </span>
+          <a
+            v-for="element in country.borders"
+            :key="element" 
+            :href="$router.resolve({ name: 'CountryDetails', params: { country: element }}).href"
+            class="bordersCountry"
+          >
+            {{ element }}
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -48,7 +55,8 @@
     props: {darkActivated: Boolean},
     data () {
       return {
-        country: null
+        country: null,
+        loading: true
       }
     },
     computed: {
@@ -68,6 +76,7 @@
     async created(){
       const {data: country} = await axios.get(`https://restcountries.com/v3.1/alpha/${this.$route.params.country}?fullText=true`)
       this.country = country[0]
+      this.loading = false
     }
   }
 </script>
@@ -78,19 +87,33 @@
   display: flex;
   flex-direction: row;
   img {
-    margin-right: 4rem;
-    width: 60%;
-    height: auto;
+    max-width: 600px;
+    min-width: 350px;
+    padding-bottom: 70px;
+    width: 100%;
+    height: 100%;
   }
   .listDetail {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
   }
+  span{
+    font-weight: 600;
+  }
+}
+section:first-child {
+  margin-right: 2rem;
+}
+#borderContainer {
+  margin-top: 5rem;
 }
 .bordersCountry {
   padding: 5px 10px;
   margin: 10px;
   background-color: hsl(0, 0%, 98%);
+  color: black;
+  box-shadow: 1px 1px 14px 2px #0000000f;
+  margin-top: 2rem;
 }
 </style>
