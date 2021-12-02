@@ -127,6 +127,11 @@
         }
     }
 }
+@media screen and (max-width: 700px) {
+  .countainerSearch{
+    flex-direction: column;
+  }
+}
 .containerDark {
   background: hsl(209, 23%, 22%)
 }

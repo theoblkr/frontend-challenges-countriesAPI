@@ -39,4 +39,9 @@
         cursor: pointer;
     }
 }
+@media screen and (max-width: 700px) {
+  #header{
+    margin-left: 2rem;
+  }
+}
 </style>

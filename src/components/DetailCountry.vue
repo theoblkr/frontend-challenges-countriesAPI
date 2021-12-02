@@ -10,7 +10,7 @@
       <img :src="country.flags.png">
       <div
         :class="darkActivated ? 'dark-mode': 'white-mode' "
-        style="margin-left: 13rem; text-align:left"
+        class="countainerInfos"
       >
         <h1>{{ country.name.common }}</h1>
         <div
@@ -100,6 +100,19 @@
   }
   span{
     font-weight: 600;
+  }
+}
+.countainerInfos {
+  margin-left: 13rem; 
+  text-align:left
+}
+@media screen and (max-width: 700px) {
+  .countainerDetail{
+    flex-direction: column;
+    padding: 0rem 2rem;
+  }
+  .countainerInfos {
+    margin-left: 0rem;
   }
 }
 section:first-child {

@@ -35,6 +35,7 @@
 #header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 2rem 4rem;
     margin-bottom: 4rem;
     span:first-child{
@@ -51,6 +52,11 @@
       right: 0;
       top: 90px;
     }
+}
+@media screen and (max-width: 700px) {
+  #header {
+    padding: 2rem 1rem;
+  }
 }
 #icon {
     margin-right: 10px;
