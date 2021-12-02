@@ -106,15 +106,6 @@
   margin-left: 13rem; 
   text-align:left
 }
-@media screen and (max-width: 700px) {
-  .countainerDetail{
-    flex-direction: column;
-    padding: 0rem 2rem;
-  }
-  .countainerInfos {
-    margin-left: 0rem;
-  }
-}
 section:first-child {
   margin-right: 2rem;
 }
@@ -128,5 +119,19 @@ section:first-child {
   color: black;
   box-shadow: 1px 1px 14px 2px #0000000f;
   margin-top: 2rem;
+}
+@media screen and (max-width: 700px) {
+  .countainerDetail{
+    flex-direction: column;
+    padding: 0rem 2rem;
+    img {
+      max-width: inherit;
+      min-width: inherit;
+      padding-bottom: 40px;
+    }
+  }
+  .countainerInfos {
+    margin-left: 0rem;
+  }
 }
 </style>
